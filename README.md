@@ -1,1 +1,2 @@
-# API_recipes
+# recipesAPI
+rest API for my app
