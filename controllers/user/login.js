@@ -21,6 +21,7 @@ module.exports.loginPost = (req, res) => {
     userSchema.findOne({ username }).then((user) => {
 
         matchPassword(password, user.password).then((resp) => {
+          
             console.log(resp);
 
             if (resp) {

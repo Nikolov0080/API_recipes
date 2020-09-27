@@ -3,7 +3,8 @@ const jwt = require('../../utils/jwt');
 
 module.exports.logout = (req, res) => {
 
-    console.log(req.cookies)
+    res.clearCookie('auth')
+    console.log("======cookie dead!======")
 
     res.send("logout")
 }
