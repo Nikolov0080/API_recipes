@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Model = mongoose.model;
+const bcrypt = require('bcrypt');
 
 const saltRounds = 6;
 

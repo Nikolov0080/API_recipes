@@ -14,5 +14,5 @@ router.get('/register', registerGet)
 router.get('/profile/:username', profileGet)
   .post('/profile/:username', profilePost);
 
-  router.get('/logout',logout);
+router.get('/logout', logout);
 module.exports = router;

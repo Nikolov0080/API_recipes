@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('home', { title: 'Express' });
 });
+
+// TODO create recipe, redact recipe,delete recipe 
 
 module.exports = router;

@@ -1,11 +1,8 @@
 const userSchema = require('../../models/user/userSchema');
-const mongoose = require('mongoose');
+const jwt = require('../../utils/jwt');
 
 module.exports.registerGet = (req, res) => {
-    res.send({
-        serverStatus: true,
-        register: "register Allowed"
-    });
+    res.render('register')
 }
 
 module.exports.registerPost = (req, res) => {
@@ -18,15 +15,22 @@ module.exports.registerPost = (req, res) => {
     } = req.body
 
     async function saveUser() {
-      return await userSchema.create({ username, email, password })
+        return await userSchema.create({ username, email, password })
     }
 
-    saveUser().then((response)=>{
-        if(response){
+    saveUser().then(async (response) => {
+        if (response) {
             console.log(response);
-            res.send("REGISTERED! --- " +response.username);
-        }else{
+
+            const token = jwt.createToken({ ...response });
+
+            res.cookie("auth", token);
+
+        } else {
             console.log("SOMETHING WENT WRONG")
         }
-    })
+    }).then(() => {
+
+        res.redirect('/?registered!!!');
+    }).catch(e => console.log(e))
 }
