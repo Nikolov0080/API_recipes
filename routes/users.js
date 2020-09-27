@@ -4,8 +4,9 @@ const { loginPost, loginGet } = require('../controllers/user/login');
 const { profileGet, profilePost } = require('../controllers/user/profile');
 const { registerGet, registerPost } = require('../controllers/user/register');
 const { logout } = require('../controllers/user/logout');
+const {authFoo} = require('../utils/authFoo');
 
-router.get('/login', loginGet)
+router.get('/login',authFoo, loginGet)
   .post('/login', loginPost);
 
 router.get('/register', registerGet)

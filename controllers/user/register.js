@@ -22,7 +22,7 @@ module.exports.registerPost = (req, res) => {
         if (response) {
             console.log(response);
 
-            const token = jwt.createToken({ ...response });
+            const token = jwt.createToken({ ...response._doc, secret: process.env.JWT_SECRET });
 
             res.cookie("auth", token);
 

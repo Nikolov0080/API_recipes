@@ -25,7 +25,7 @@ module.exports.loginPost = (req, res) => {
             console.log(resp);
 
             if (resp) {
-                const token = jwt.createToken({ user });
+                const token = jwt.createToken({ ...user._doc ,secret:process.env.JWT_SECRET});
                 res.cookie("auth", token)
                 res.send("valid to login")
             } else {
