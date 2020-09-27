@@ -7,10 +7,7 @@ const matchPassword = (currPassword, userHash) => {
 }
 
 module.exports.loginGet = (req, res) => {
-    res.send({
-        serverStatus: true,
-        login: "login Allowed"
-    });
+    res.render('login');
 }
 
 module.exports.loginPost = (req, res) => {
@@ -34,7 +31,6 @@ module.exports.loginPost = (req, res) => {
                 res.send("wrong password")
                 // TODO authorization
             }
-
         })
     })
 }
