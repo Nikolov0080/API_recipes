@@ -4,17 +4,20 @@ const { loginPost, loginGet } = require('../controllers/user/login');
 const { profileGet, profilePost } = require('../controllers/user/profile');
 const { registerGet, registerPost } = require('../controllers/user/register');
 const { logout } = require('../controllers/user/logout');
-const { authFoo } = require('../utils/authFoo');
-//TODO - FINISH AUTH
-router.get('/login',  loginGet)
+const { authFooLogged, authFooGuest } = require('../utils/authFoo');
+//TODO - FINISH AUTH!
+
+router.get('/login', loginGet)
   .post('/login', loginPost);
 
 router.get('/register', registerGet)
   .post('/register', registerPost);
 
-router.get('/profile/:username', profileGet)
+router.get('/profile/:username', authFooLogged, profileGet)
   .post('/profile/:username', profilePost);
 
 router.get('/logout', logout);
+
+
 
 module.exports = router;
