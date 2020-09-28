@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const recipesRouter = require('./routes/recipes');
 const hbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 var app = express();
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/recipes',recipesRouter)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -43,7 +45,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{err});
 });
 
 
