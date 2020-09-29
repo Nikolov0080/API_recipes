@@ -6,7 +6,6 @@ module.exports.registerGet = (req, res) => {
 }
 
 module.exports.registerPost = (req, res) => {
-    console.log(req.body);
 
     const {
         username,
@@ -20,7 +19,6 @@ module.exports.registerPost = (req, res) => {
 
     saveUser().then(async (response) => {
         if (response) {
-            console.log(response);
 
             const token = jwt.createToken({ ...response._doc, secret: process.env.JWT_SECRET });
 

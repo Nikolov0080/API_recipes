@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const { createRecipe } = require('../controllers/recipes/createRecipe');
+const { authFooLogged } = require('../utils/authFoo');
 
-router.get('/create-recipe', (req, res) => {
+router.get('/create-recipe', authFooLogged, (req, res) => {
     res.render('createRecipe')
-}).post('/create-recipe', (req, res) => {
-    console.log(req.body)
-    res.redirect('/recipes/create-recipe');
-})
+}).post('/create-recipe', createRecipe);
 
 module.exports = router;

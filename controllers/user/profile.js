@@ -1,5 +1,4 @@
 module.exports.profileGet = (req, res) => {
-    console.log(78454);
     
     res.render('profile')
 }

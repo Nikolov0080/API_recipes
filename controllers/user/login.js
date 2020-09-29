@@ -11,7 +11,6 @@ module.exports.loginGet = (req, res) => {
 }
 
 module.exports.loginPost = (req, res) => {
-    console.log(req.body);
 
     const {
         username,
@@ -22,7 +21,6 @@ module.exports.loginPost = (req, res) => {
 
         matchPassword(password, user.password).then((resp) => {
           
-            console.log(resp);
 
             if (resp) {
                 const token = jwt.createToken({ ...user._doc ,secret:process.env.JWT_SECRET});

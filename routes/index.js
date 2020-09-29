@@ -8,7 +8,6 @@ router.get('/', function (req, res, next) {
   var user = '';
 
   if (req.cookies['auth']) {
-    console.log('da')
     user = decodeToken(req.cookies['auth']).username;
     return res.render('home', { title: 'Express', username: user });
 

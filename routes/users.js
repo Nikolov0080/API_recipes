@@ -5,12 +5,12 @@ const { profileGet, profilePost } = require('../controllers/user/profile');
 const { registerGet, registerPost } = require('../controllers/user/register');
 const { logout } = require('../controllers/user/logout');
 const { authFooLogged, authFooGuest } = require('../utils/authFoo');
-//TODO - FINISH AUTH!
 
-router.get('/login', loginGet)
+
+router.get('/login', authFooGuest, loginGet)
   .post('/login', loginPost);
 
-router.get('/register', registerGet)
+router.get('/register', authFooGuest, registerGet)
   .post('/register', registerPost);
 
 router.get('/profile/:username', authFooLogged, profileGet)
