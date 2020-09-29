@@ -3,6 +3,8 @@ const jwt = require('../../utils/jwt');
 
 
 module.exports.createRecipe = (req, res, next) => {
+    
+    const creatorId = jwt.decodeToken(req.cookies['auth'])._id;
 
     const {
         recipeName,
@@ -20,11 +22,16 @@ module.exports.createRecipe = (req, res, next) => {
             prepTime,
             cookTime,
             directions,
-            difficulty
+            difficulty,
+            creatorId,
+            // photos:[] TODO
         })
     }
 
-    const creatorId = jwt.decodeToken(req.cookies['auth'])._id;
+    saveRecipe().then((response)=>{
+        console.log(response)
+    })
+
 
     console.log(creatorId);
 
