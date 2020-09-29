@@ -1,6 +1,6 @@
 <h1>Create Recipe</h1>
 
-<form action="/recipes/create-recipe" method="post" id="1000">
+<form name="uploader" action="/recipes/create-recipe" method="post" >
 
     <br>
     recipeName
@@ -17,12 +17,13 @@
     <br>
     directions
     <textarea name="directions"></textarea>
+   
     <br>
     difficulty
     <input type="number" name="difficulty">
-    <br>
+    <br> 
     image1
-    <input type="file" name="image1">
+    <input type="file"  name="image1"  id="file" >
     <br>
     image2
     <input type="file" name="image2">

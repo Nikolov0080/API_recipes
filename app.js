@@ -7,7 +7,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const hbs = require('express-handlebars');
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 var app = express();
 require('mongoose').model;
 
@@ -22,16 +23,24 @@ app.engine('hbs', hbs({
   partialsDir: __dirname + '/views'
 }));
 
-app.use(bodyparser.json());
+app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: "16mb", extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/recipes', recipesRouter)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+///
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
+///
 
 
 // catch 404 and forward to error handler

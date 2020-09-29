@@ -19,6 +19,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    skillLevel: {
+        type: String,
+        required: true
+    },
+    // profilePicture:{
+    //     type:Ima
+    // },
+
     favorites: [{ // type: mongoose.Schema.Types.ObjectId
         type: "ObjectId",
         ref: "Recipes"
