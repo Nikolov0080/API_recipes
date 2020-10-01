@@ -24,7 +24,6 @@ module.exports.loginPost = (req, res) => {
             return;
         }
 
-
         matchPassword(password, user.password).then((resp) => {
 
             if (resp) {
