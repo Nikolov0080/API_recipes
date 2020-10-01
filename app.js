@@ -20,16 +20,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.engine('hbs', hbs({
+
   extname: 'hbs',
   layoutsDir: __dirname + '/views/layouts',
   partialsDir: __dirname + '/views'
 }));
+
+
+
 
 cloudinary.config({
   cloud_name: process.env.API_CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 });
+
 
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(logger('dev'));
