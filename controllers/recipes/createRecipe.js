@@ -1,10 +1,6 @@
 const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
-// const cloudinary = require('cloudinary');
-
-
-
 
 module.exports.createRecipe = (req, res, next) => {
 
@@ -23,6 +19,7 @@ module.exports.createRecipe = (req, res, next) => {
                 cookTime,
                 directions,
                 difficulty,
+                category
             } = req.body;
         
             async function saveRecipe() {
@@ -34,6 +31,7 @@ module.exports.createRecipe = (req, res, next) => {
                     directions,
                     difficulty,
                     creatorId,
+                    category,
                     image
                 })
             }
