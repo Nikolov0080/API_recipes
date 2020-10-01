@@ -2,7 +2,10 @@ const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
 const fs = require('fs');
+const { saveImage } = require('../../utils/saveImage');
 const cloudinary = require('cloudinary').v2;
+
+
 
 module.exports.createRecipe = (req, res, next) => {
 
@@ -10,6 +13,7 @@ module.exports.createRecipe = (req, res, next) => {
 
     upload(req, res, (err) => {
         if (err) {
+            console.log(err)
             res.render('error', { err })
         } else {
             const image = req.file;
@@ -23,33 +27,33 @@ module.exports.createRecipe = (req, res, next) => {
                 difficulty,
                 category
             } = req.body;
-            console.log();
-// TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
-            cloudinary.uploader.upload(process.cwd() + "/uploads/" + image.filename,
+            // // TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
+            // cloudinary.uploader.upload(process.cwd() + "/uploads/" + image.filename,
 
-                {
-                    resource_type: "image", public_id: "recipes/images/" + image.filename,
-                    overwrite: true
-                }, (err) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                }).then((da) => {
-                    console.log(da)
-                });
+            //     {
+            //         resource_type: "image", public_id: "recipes/images/" + image.filename,
+            //         overwrite: true
+            //     }, (err) => {
+            //         if (err) {
+            //             console.log(err)
+            //         }
+            //     }).then((da) => {
+            //         console.log(da)
+            //     }).catch((e)=>{
+            //         console.log(e)
+            //     })
 
-// TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
-// SET DELETE IMAGE FROM CURRENT SERVER STORAGE 
-// SET IMAGE IN RECIPE DATA TO IMAGE--URL
+            saveImage(image.filename).then(resp=>{
+                console.log(resp)
+            });
 
-            // fs.unlink(process.cwd() + "/uploads/" + image.filename, (err) => {
-            //     if (err) {
-            //         console.log(err)
-            //     }
-            //     console.log("deleted")
-            // })
+            // TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
+            // SET DELETE IMAGE FROM CURRENT SERVER STORAGE 
+            // SET IMAGE IN RECIPE DATA TO IMAGE--URL
 
-           
+          
+
+
 
             // async function saveRecipe() {
             //     return await recipeSchema.create({
