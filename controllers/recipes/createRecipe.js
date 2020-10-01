@@ -1,6 +1,9 @@
 const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
-
+const multer = require('multer');
+const upload = multer({
+    dest: '/uploads/'
+})
 module.exports.createRecipe = (req, res, next) => {
 
     const creatorId = jwt.decodeToken(req.cookies['auth'])._id;
