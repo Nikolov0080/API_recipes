@@ -1,6 +1,6 @@
 <h1>Create Recipe</h1>
 
-<form name="uploader" action="/recipes/create-recipe" method="post" >
+<form enctype="multipart/form-data" action="/recipes/create-recipe" method="post" >
 
     <br>
     recipeName
@@ -17,32 +17,16 @@
     <br>
     directions
     <textarea name="directions"></textarea>
-   
     <br>
     difficulty
     <input type="number" name="difficulty">
     <br> 
-    image1
-    <input type="file"  name="image1"  id="file" >
-    <br>
+      category (dropdown)
+    <input type="text" name="category">
+    <br> 
     image2
-    <input type="file" name="image2">
-    <br>
-
-    <button type="submit">share recipe</button>
-
-
-</form>
-
-
-
-<form  action="/recipes/create-recipe" method="post" >
-
-    image
     <input type="file" name="image">
     <br>
 
-    <button type="submit">share recipe</button>
-
-
+    <button name="upload" type="submit">share recipe</button>
 </form>

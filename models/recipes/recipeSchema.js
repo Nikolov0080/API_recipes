@@ -28,6 +28,13 @@ const recipeSchema = new Schema({
     difficulty:{
         type:String,
         require: true
+    }, 
+    category:{
+        type:String,
+        require: true
+    },
+    image:{
+
     },
 
     likes: 0,

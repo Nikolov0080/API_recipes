@@ -27,9 +27,12 @@ module.exports.authFooGuest = (req, res, next) => {
 
     const decodedCookie = jwt.decodeToken(cookie);
 
-    if (decodedCookie.secret !== process.env.JWT_SECRET) {
-        return res.redirect('/');
-    }
+    if (decodedCookie) {
 
+        if (decodedCookie.secret !== process.env.JWT_SECRET) {
+            return res.redirect('/');
+        }
+
+    }
     next()
 }
