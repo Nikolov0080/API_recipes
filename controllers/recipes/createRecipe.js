@@ -1,14 +1,13 @@
 const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
-const fs = require('fs');
 const { saveRecipeImage } = require('../../utils/saveRecipeImage');
 
 module.exports.createRecipe = (req, res, next) => {
 
     const creatorId = jwt.decodeToken(req.cookies['auth'])._id;
 
-    upload(req, res, (err) => {
+    upload.single('image')(req, res, (err) => {
         if (err) {
             console.log(err)
             res.render('error', { err })
@@ -41,7 +40,7 @@ module.exports.createRecipe = (req, res, next) => {
 
             saveRecipeImage(image.filename).then(resp => {
                 // resp === imageURL from the cloudinary response...
-                console.log(resp);
+                // console.log(resp);
 
                 saveRecipe(resp).then((dbResponse)=>{
                     if(dbResponse){ // if error return error query ... just to test the API for now
@@ -54,8 +53,6 @@ module.exports.createRecipe = (req, res, next) => {
             }).catch((e) => {
                 console.log(e);
             });
-
         }
     });
-
 }

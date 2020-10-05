@@ -20,12 +20,12 @@ module.exports.saveRecipeImage = (imageName) => {
         fs.unlink(process.cwd() + "/uploads/" + imageName, (err) => {
             // deleting image from file system after upload to cloudinary
             if (err) {
-                console.log(err)
+                console.log(err);
             }
-            console.log("deleted")
+            console.log("deleted");
         })
         return resp.secure_url;
     }).catch((e) => {
-        console.log(e)
-    })
+        console.log(e);
+    });
 }
