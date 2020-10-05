@@ -2,10 +2,7 @@ const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
 const fs = require('fs');
-const { saveImage } = require('../../utils/saveImage');
-const cloudinary = require('cloudinary').v2;
-
-
+const { saveRecipeImage } = require('../../utils/saveRecipeImage');
 
 module.exports.createRecipe = (req, res, next) => {
 
@@ -27,53 +24,38 @@ module.exports.createRecipe = (req, res, next) => {
                 difficulty,
                 category
             } = req.body;
-            // // TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
-            // cloudinary.uploader.upload(process.cwd() + "/uploads/" + image.filename,
 
-            //     {
-            //         resource_type: "image", public_id: "recipes/images/" + image.filename,
-            //         overwrite: true
-            //     }, (err) => {
-            //         if (err) {
-            //             console.log(err)
-            //         }
-            //     }).then((da) => {
-            //         console.log(da)
-            //     }).catch((e)=>{
-            //         console.log(e)
-            //     })
+            async function saveRecipe(imageURL) {
+                return await recipeSchema.create({
+                    recipeName,
+                    products,
+                    prepTime,
+                    cookTime,
+                    directions,
+                    difficulty,
+                    creatorId,
+                    category,
+                    image: imageURL
+                });
+            }
 
-            saveImage(image.filename).then(resp=>{
-                console.log(resp)
+            saveRecipeImage(image.filename).then(resp => {
+                // resp === imageURL from the cloudinary response...
+                console.log(resp);
+
+                saveRecipe(resp).then((dbResponse)=>{
+                    if(dbResponse){ // if error return error query ... just to test the API for now
+                        res.redirect('/recipes/create-recipe?created');
+                    }else{
+                        res.redirect('/recipes/create-recipe?error');
+                    }
+                });
+
+            }).catch((e) => {
+                console.log(e);
             });
 
-            // TODO --- TAKE IN NEW FILE SAVE IMAGE FUNCTION
-            // SET DELETE IMAGE FROM CURRENT SERVER STORAGE 
-            // SET IMAGE IN RECIPE DATA TO IMAGE--URL
-
-          
-
-
-
-            // async function saveRecipe() {
-            //     return await recipeSchema.create({
-            //         recipeName,
-            //         products,
-            //         prepTime,
-            //         cookTime,
-            //         directions,
-            //         difficulty,
-            //         creatorId,
-            //         category,
-            //         image
-            //     })
-            // }
-
-            // saveRecipe().then((response) => {
-            //     console.log(response)
-            // })
         }
     });
 
-    res.redirect('/recipes/create-recipe');
 }
