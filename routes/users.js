@@ -5,10 +5,10 @@ const { profileGet, profilePost } = require('../controllers/user/profile');
 const { registerGet, registerPost } = require('../controllers/user/register');
 const { logout } = require('../controllers/user/logout');
 const { authFooLogged, authFooGuest } = require('../utils/authFoo');
-
+const { login } = require('../validations/user');
 
 router.get('/login', authFooGuest, loginGet)
-  .post('/login', loginPost);
+  .post('/login', login, loginPost);
 
 router.get('/register', authFooGuest, registerGet)
   .post('/register', registerPost);

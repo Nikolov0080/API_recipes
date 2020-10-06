@@ -9,8 +9,6 @@ module.exports.registerGet = (req, res) => {
 
 module.exports.registerPost = (req, res) => {
 
-   
-
     upload.single('profilePicture')(req, res, (err) => {
 
         if (err) {
@@ -19,9 +17,13 @@ module.exports.registerPost = (req, res) => {
         } else {
             const profilePic = req.file;
 
+            if (!profilePic) { // TODO FIX ERROR WITH EMPTY PROFILE PIC FIELD
+                return res.send("Profile pic is required");
+            }
+
             saveProfilePicture(profilePic.filename).then((profilePictureURL) => {
                 console.log(profilePictureURL)
-
+                // TODO -- STOP THE FILE UPLOAD IF SCHEMA IS INVALID !
                 const {
                     username,
                     email,
@@ -30,7 +32,7 @@ module.exports.registerPost = (req, res) => {
                 } = req.body
 
                 async function saveUser() {
-                   
+
                     return await userSchema.create({ username, email, password, skillLevel, profilePictureURL })
                 }
 
@@ -48,14 +50,11 @@ module.exports.registerPost = (req, res) => {
 
                     res.redirect('/?registered!!!');
                 }).catch(e => {
-                    
+
                     console.log(e)
-                return res.redirect('/error')
+                    return res.redirect('/error')
                 })
-
             })
-
         }
-        
     })
 }
