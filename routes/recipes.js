@@ -12,7 +12,6 @@ router.get('/create-recipe', authFooLogged, (req, res) => {
 router.get('/all-recipes', authFooLogged, getAllRecipesGet)
 .post('/all-recipes', getAllRecipesPost);
 
-
 router.get('/recipe-details', authFooLogged, getRecipeDetails)
 .post('/recipe-details', postRecipeDetails);
 

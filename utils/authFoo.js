@@ -6,13 +6,15 @@ module.exports.authFooLogged = (req, res, next) => {
     const cookie = req.cookies['auth'];
 
     if (!cookie) {
-        return res.redirect('/');
+        return res.send('UNAUTHORIZED');
+
     }
 
     const decodedCookie = jwt.decodeToken(cookie);
 
     if (decodedCookie.secret !== process.env.JWT_SECRET) {
-        return res.redirect('/');
+        return res.send('UNAUTHORIZED');
+
     }
 
     next();
@@ -22,7 +24,8 @@ module.exports.authFooGuest = (req, res, next) => {
     const cookie = req.cookies['auth'];
 
     if (cookie) {
-        return res.redirect('/')
+        return res.send('UNAUTHORIZED');
+
     }
 
     const decodedCookie = jwt.decodeToken(cookie);
@@ -30,7 +33,7 @@ module.exports.authFooGuest = (req, res, next) => {
     if (decodedCookie) {
 
         if (decodedCookie.secret !== process.env.JWT_SECRET) {
-            return res.redirect('/');
+            return res.send('UNAUTHORIZED');
         }
 
     }
