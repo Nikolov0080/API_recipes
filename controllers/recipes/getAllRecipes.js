@@ -9,8 +9,7 @@ module.exports.getAllRecipesGet = (req, res) => {
     allRecipes.then((result) => {
         const data = result;
 
-// TODO FINISH IMAGE UPLOAD SOMEWHERE LOL.....
-        res.render('allRecipes',{data});
+        res.render('allRecipes', { data:data });
     }).catch((err) => {
 
     });
@@ -18,7 +17,5 @@ module.exports.getAllRecipesGet = (req, res) => {
 }
 
 module.exports.getAllRecipesPost = (req, res) => {
-
-
 
 }

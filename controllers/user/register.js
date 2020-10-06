@@ -9,13 +9,7 @@ module.exports.registerGet = (req, res) => {
 
 module.exports.registerPost = (req, res) => {
 
-    /*
-    ---- TODO ---- 
-    CREATE CHOP - CHOP FUNCTIONALITY WITH FACE RECOGNITION FOR PROFILE PIC
-    SAVE SOME DATA BY COMPRESSING THE IMAGE
-    SAVE IMAGE LINK FROM CLOUDINARY IN USER-PROFILE OBJECT...
-    
-    */
+   
 
     upload.single('profilePicture')(req, res, (err) => {
 
