@@ -1,7 +1,7 @@
 const recipeSchema = require('../../models/recipes/recipeSchema');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
-const { saveRecipeImage } = require('../../utils/saveRecipeImage');
+const { saveRecipeImage } = require('../../utils/cloudinary/saveRecipeImage');
 
 module.exports.createRecipe = (req, res, next) => {
 

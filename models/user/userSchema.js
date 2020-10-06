@@ -23,9 +23,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    // profilePicture:{
-    //     type:Ima
-    // },
+    profilePictureURL:{
+        type:String,
+        required:true
+    },
 
     favorites: [{ // type: mongoose.Schema.Types.ObjectId
         type: "ObjectId",
