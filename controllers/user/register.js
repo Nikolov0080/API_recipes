@@ -2,12 +2,20 @@ const userSchema = require('../../models/user/userSchema');
 const { saveProfilePicture } = require('../../utils/cloudinary/saveProfilePicture');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
+const { validationResult } = require('express-validator');
+const { deletePicture } = require('../../utils/cloudinary/deletePicture');
 
 module.exports.registerGet = (req, res) => {
     res.render('register')
 }
 
 module.exports.registerPost = (req, res) => {
+
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     upload.single('profilePicture')(req, res, (err) => {
 
@@ -28,7 +36,6 @@ module.exports.registerPost = (req, res) => {
                 return res.send("Profile pic is required");
             } else {
                 saveProfilePicture(profilePic.filename).then((resp) => {
-
                     return resp;
                     // TODO -- STOP THE FILE UPLOAD IF SCHEMA IS INVALID !
                 }).then((profilePictureURL) => {
@@ -51,7 +58,6 @@ module.exports.registerPost = (req, res) => {
                         res.redirect('/?registered!!!');
                     }).catch(e => {
 
-                        console.log(e._message)
                         console.log(e)
 
                         return res.send(e._message)

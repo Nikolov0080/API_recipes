@@ -1,7 +1,7 @@
 const userSchema = require('../../models/user/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('../../utils/jwt');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 const matchPassword = (currPassword, userHash) => {
     return bcrypt.compare(currPassword, userHash);
