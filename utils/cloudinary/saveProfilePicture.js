@@ -24,7 +24,7 @@ module.exports.saveProfilePicture = (imageName) => {
             }
             console.log("deleted");
         })
-        console.log(resp)
+        console.log("Picture uploaded!");
         return resp.secure_url;
     }).catch((e) => {
         console.log(e);

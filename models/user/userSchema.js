@@ -23,9 +23,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    profilePictureURL:{
-        type:String,
-        required:true
+    profilePictureURL: {
+        type: String,
+        required: true
     },
 
     favorites: [{ // type: mongoose.Schema.Types.ObjectId
