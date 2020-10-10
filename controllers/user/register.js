@@ -32,7 +32,6 @@ module.exports.registerPost = (req, res) => {
                 } = req.body
 
                 async function saveUser() {
-
                     return await userSchema.create({ username, email, password, skillLevel, profilePictureURL })
                 }
 
