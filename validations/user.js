@@ -1,3 +1,4 @@
+const userSchema = require('../models/user/userSchema');
 const validator = require('validator').default;
 
 exports.loginValidation = ({ username, password }) => {
@@ -13,14 +14,25 @@ exports.loginValidation = ({ username, password }) => {
     if (!validator.isLength(password, { min: 6, max: 20 })) {
         return 'password - invalid length'
     }
-
     return false;
 }
 
-exports.registerValidator = ({ username, password, rePassword, email, skillLevel }) => {
+exports.registerValidator =  ({ username, password, rePassword, email, skillLevel }) => {
 
     if (validator.isEmpty(username, { ignore_whitespace: false })) {
         return 'username - Empty???'
+    }
+
+    if (validator.isEmpty(password, { ignore_whitespace: false })) {
+        return 'password - Empty???'
+    }
+
+    if (validator.isEmpty(email, { ignore_whitespace: false })) {
+        return 'email - Empty???'
+    }
+
+    if (validator.isEmpty(skillLevel, { ignore_whitespace: false })) {
+        return 'Skill level - Empty???'
     }
 
     if (!validator.isLength(username, { min: 6, max: 20 })) {
