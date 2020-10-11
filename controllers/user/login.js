@@ -1,7 +1,6 @@
 const userSchema = require('../../models/user/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('../../utils/jwt');
-const { validationResult } = require('express-validator');
 
 const matchPassword = (currPassword, userHash) => {
     return bcrypt.compare(currPassword, userHash);
@@ -12,11 +11,6 @@ module.exports.loginGet = (req, res) => { // renders the login page for tests
 }
 
 module.exports.loginPost = (req, res) => {
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
 
     const {
         username,
