@@ -1,6 +1,7 @@
 const userSchema = require('../../models/user/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('../../utils/jwt');
+const { loginValidation } = require('../../validations/user');
 
 const matchPassword = (currPassword, userHash) => {
     return bcrypt.compare(currPassword, userHash);
@@ -11,6 +12,12 @@ module.exports.loginGet = (req, res) => { // renders the login page for tests
 }
 
 module.exports.loginPost = (req, res) => {
+
+   const isValid = loginValidation(req.body)
+
+    if (isValid) {
+      return  res.send(isValid)
+    }
 
     const {
         username,

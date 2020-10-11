@@ -2,15 +2,22 @@ const userSchema = require('../../models/user/userSchema');
 const { saveProfilePicture } = require('../../utils/cloudinary/saveProfilePicture');
 const jwt = require('../../utils/jwt');
 const { upload } = require('../../utils/multerConf');
-// const { deletePicture } = require('../../utils/cloudinary/deletePicture');
+const { registerValidator } = require('../../validations/user');
 
 module.exports.registerGet = (req, res) => {
     res.render('register')
 }
 
-module.exports.registerPost = (req,res) => {
- 
+module.exports.registerPost = (req, res) => {
+
     upload.single('profilePicture')(req, res, (err) => {
+
+        const isValid = registerValidator(req.body)
+        console.log(isValid);
+
+        if(isValid){
+         return   res.send(isValid)
+        }
 
         const {
             username,
