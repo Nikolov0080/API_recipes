@@ -5,7 +5,7 @@ const { upload } = require('../../utils/multerConf');
 const { registerValidator } = require('../../validations/user');
 
 module.exports.registerGet = (req, res) => {
-    res.render('register')
+    res.render('register');
 }
 
 module.exports.registerPost = (req, res) => {
@@ -13,11 +13,11 @@ module.exports.registerPost = (req, res) => {
     upload.single('profilePicture')(req, res, async (err) => {
 
         const isValid = registerValidator(req.body)
-        console.log(isValid);
 
         if (isValid) {
-            return res.send(isValid)
+            return res.send(isValid);
         }
+
         const {
             username,
             email,
@@ -41,7 +41,8 @@ module.exports.registerPost = (req, res) => {
 
                     async function saveUser() {
                         return await userSchema.create({ username, email, password, skillLevel, profilePictureURL }).catch((err) => {
-                            console.log(err.code)
+                            console.log(err.code);
+                            console.log("something went wrong with registration...");
                             // TODO  continue with the err catching <3
                         })
                     }
