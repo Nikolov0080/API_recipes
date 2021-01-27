@@ -16,6 +16,14 @@ var app = express();
 
 require('mongoose').model;
 
+(function wakeup() {
+  require('open')('https://mywebsite.herokuapp.com', (err) => {
+    if (err) throw err;
+    console.log('Woke up!');
+    setTimeout(wakeup, 1740000); //29m
+  });
+})()
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
