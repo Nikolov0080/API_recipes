@@ -8,7 +8,7 @@ const saltRounds = 6;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
@@ -24,25 +24,18 @@ const userSchema = new Schema({
     },
     profilePictureURL: {
         type: String,
-        required: true
+        required: true,
     },
 
-    favorites: [{ // type: mongoose.Schema.Types.ObjectId
-        type: "ObjectId",
-        ref: "Recipes"
-    }],
     likedRecipes: [{
         type: "ObjectId",
         ref: "Recipes"
     }],
+  
     userRecipes: [{
         type: "ObjectId",
         ref: "Recipes"
     }],
-    favorites: [{
-        type: "ObjectId",
-        ref: "Recipes"
-    }]
 
 });
 

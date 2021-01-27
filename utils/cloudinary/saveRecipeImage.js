@@ -8,7 +8,7 @@ module.exports.saveRecipeImage = (imageName) => {
         public_id: "recipes/" + imageName,
         overwrite: true,
         transformation: [{
-            quality: "10",
+            quality: "40",
             format: "png",
             crop:"scale"
         }]

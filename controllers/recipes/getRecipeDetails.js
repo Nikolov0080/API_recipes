@@ -1,23 +1,26 @@
 const recipeSchema = require('../../models/recipes/recipeSchema');
+const mongoose = require('mongoose');
 
 module.exports.getRecipeDetails = (req, res) => {
 
-console.log(req.url)
-
-    // const id = req.params / req.body
-    const testId = "5f7b622a18e4fe41b8b7392e"
-    recipeSchema.findById(testId, (err, data) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        return data;
-    }).exec().then((data) => {
-        res.render('recipeDetails', { data:data,prepTime:data.prepTime });
-    })
+    const id = req.params.id
+    const isValidId =mongoose.Types.ObjectId.isValid(id);
+    
+    if (isValidId) {
+        recipeSchema.findById({ _id: id }, (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.status(203).send(err.message)
+            }
+        }).exec().then((data) => {
+            return res.status(203).send(data);
+        })
+    }else{
+        return res.status(203).send('Something is invalid');
+    }
 
 }
 
 module.exports.postRecipeDetails = (id) => {
-//TODO POST COMMENT , LIKE , ADD TO FAVORITES
+    //TODO POST COMMENT , LIKE , ADD TO FAVORITES
 }

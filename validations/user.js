@@ -3,13 +3,12 @@ const mongoose = require('mongoose');
 const validator = require('validator').default;
 
 exports.loginValidation = ({ username, password }) => {
-    // validations just for the length TODO - more validations
-
-    if (validator.isEmpty(username, { ignore_whitespace: false })) {
+   
+    if (validator.isEmpty(username) || username === undefined) {
         return 'username - Empty???';
     }
 
-    if (validator.isEmpty(password, { ignore_whitespace: false })) {
+    if (validator.isEmpty(password) || password === undefined) {
         return 'password - Empty???';
     }
 
@@ -25,19 +24,19 @@ exports.loginValidation = ({ username, password }) => {
 
 exports.registerValidator = ({ username, password, rePassword, email, skillLevel }) => {
 
-    if (validator.isEmpty(username, { ignore_whitespace: false })) {
+    if (validator.isEmpty(username)) {
         return 'username - Empty???';
     }
 
-    if (validator.isEmpty(password, { ignore_whitespace: false })) {
+    if (validator.isEmpty(password)) {
         return 'password - Empty???';
     }
 
-    if (validator.isEmpty(email, { ignore_whitespace: false })) {
+    if (validator.isEmpty(email)) {
         return 'email - Empty???';
     }
 
-    if (validator.isEmpty(skillLevel, { ignore_whitespace: false })) {
+    if (validator.isEmpty(skillLevel)) {
         return 'Skill level - Empty???';
     }
 
@@ -49,10 +48,10 @@ exports.registerValidator = ({ username, password, rePassword, email, skillLevel
         return 'password - invalid length';
     }
 
-    if (!validator.matches(password, rePassword)) {
+    if (!validator.equals(password, rePassword)) {
         return 'password and Repeat password must match';
     }
-
+ 
     if (!validator.isEmail(email)) {
         return "email must be an Email => example@prov.com";
     }

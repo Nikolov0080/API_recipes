@@ -7,8 +7,8 @@ exports.recipesValidations = (recipe) => {
         return 'fill recipe name'
     }
 
-    if (validator.isEmpty(recipe.products, { ignore_whitespace: false })) {
-        return 'fill products'
+    if (validator.isEmpty(recipe.ingredients, { ignore_whitespace: false })) {
+        return 'fill ingredients'
     }
 
     if (validator.isEmpty(recipe.prepTime, { ignore_whitespace: false })) {
@@ -29,6 +29,10 @@ exports.recipesValidations = (recipe) => {
 
     if (validator.isEmpty(recipe.category, { ignore_whitespace: false })) {
         return 'fill category'
+    }
+
+    if (validator.isEmpty(recipe.description, { ignore_whitespace: false })) {
+        return 'fill description'
     }
 
     return false;

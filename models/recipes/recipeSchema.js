@@ -9,7 +9,7 @@ const recipeSchema = new Schema({
         require: true
     },
 
-    products: {
+    ingredients: {
         type: String,
         require: true
     },
@@ -25,25 +25,25 @@ const recipeSchema = new Schema({
         type: String,
         require: true
     },
-    difficulty:{
-        type:String,
-        require: true
-    }, 
-    category:{
-        type:String,
+    difficulty: {
+        type: String,
         require: true
     },
-    image:{
+    category: {
+        type: String,
+        require: true
+    },
+    description: {
+        type: String,
+        require: true
+    },
+    image: {
 
     },
 
-    likes: 0,
-    comments: [],
-    favorites: 0,
-
-    creatorId: { type: "ObjectId", ref: "User" }
-
+    likes: [{ type: "ObjectId", ref: "User" }],
+    creatorId: { type: "ObjectId", ref: "User" },
+    comments: []
 });
-
 
 module.exports = new Model('Recipes', recipeSchema);

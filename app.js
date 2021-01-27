@@ -10,10 +10,11 @@ const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cloudinary = require('cloudinary');
+const cors = require('cors');
+
 var app = express();
 
 require('mongoose').model;
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,25 +27,25 @@ app.engine('hbs', hbs({
   partialsDir: __dirname + '/views'
 }));
 
-
-
-
 cloudinary.config({
   cloud_name: process.env.API_CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 });
 
-
-app.use(bodyParser.json({ limit: "16mb", extended: true }));
+app.use(cors({
+  exposedHeaders:"auth"
+}));
+ 
+app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ limit: "16mb", extended: false }));
+app.use(express.urlencoded({ limit: "10mb", extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/recipes', recipesRouter)
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/recipes', recipesRouter);
+app.use('/api/users', usersRouter);
 ///
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 },
