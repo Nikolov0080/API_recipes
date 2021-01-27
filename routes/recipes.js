@@ -12,6 +12,8 @@ const { deleteRecipe } = require('../controllers/recipes/deleteRecipe');
 const { addComment } = require('../controllers/recipes/userActs/comments/addComment');
 const { deleteComment } = require('../controllers/recipes/userActs/comments/deleteComment');
 
+
+
 router.get('/create-recipe', authFooLogged, (req, res) => {
     res.render('createRecipe')
 }).post('/create-recipe', createRecipe);
