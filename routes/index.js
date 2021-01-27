@@ -3,6 +3,11 @@ var router = express.Router();
 const { decodeToken } = require('../utils/jwt');
 
 /* GET home page. */
+
+router.get('/',(req,res)=>{
+  res.send('do not sleep my bi4')
+})
+
 router.get('/api', function (req, res) {
   var user = '';
 

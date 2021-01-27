@@ -36,7 +36,7 @@ cloudinary.config({
 app.use(cors({
   exposedHeaders:"auth"
 }));
- 
+
 app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(logger('dev'));
 app.use(express.json());
@@ -72,6 +72,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { err: err });
 });
-
 
 module.exports = app;
