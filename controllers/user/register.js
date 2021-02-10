@@ -70,7 +70,7 @@ module.exports.registerPost = (req, res) => {
             function allValid() {
                 if (!profilePic) {
                     async function saveUser() {
-                        return await userSchema.create({ username, email, password, skillLevel, profilePictureURL: 'no image' }).catch((err) => {
+                        return await userSchema.create({ username, email, password, skillLevel, profilePictureURL: 'https://res.cloudinary.com/recepsbg/image/upload/v1612981058/Categories/Common/defaultImage_tu3g0x.jpg' }).catch((err) => {
                             console.log(err.code);
                             console.log("something went wrong with registration...");
                         })
