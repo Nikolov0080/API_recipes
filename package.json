@@ -2,7 +2,7 @@
   "name": "recipes15-api",
   "version": "0.0.0",
   "private": true,
-   "scripts": {
+  "scripts": {
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
