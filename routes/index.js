@@ -5,7 +5,7 @@ const { decodeToken } = require('../utils/jwt');
 /* GET home page. */
 
 router.get('/',(req,res)=>{
-  res.send('do not sleep my bi4')
+  return res.render('home', { title: 'Express', username: user });
 })
 
 router.get('/api', function (req, res) {
